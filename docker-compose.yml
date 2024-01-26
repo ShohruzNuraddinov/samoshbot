@@ -29,8 +29,10 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-    env_file:
-      - ./.env
+    environment:
+      - DJANGO_DEBUG=True
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - TELEGRAM_TOKEN=5013701995:AAEqNM8T3MGDweksq2XneRguzENpzV2CsPY
     # depends_on:
     #   - db
   # bot:

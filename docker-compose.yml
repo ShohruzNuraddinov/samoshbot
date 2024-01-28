@@ -36,7 +36,7 @@ services:
     environment:
       - DJANGO_DEBUG=True
       - DATABASE_URL=sqlite:///db.sqlite3
-      - TELEGRAM_TOKEN=5013701995:AAEqNM8T3MGDweksq2XneRguzENpzV2CsPY
+      - TELEGRAM_TOKEN=5266772168:AAEbDYMJTEQo5SKNH_p2o0XWt0Y70OOvJGI
     # depends_on:
     #   - db
   # bot:

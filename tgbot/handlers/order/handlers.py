@@ -137,22 +137,24 @@ def cart_update(update: Update, context: CallbackContext):
         cart.save()
 
     if call_data[1] == 'minus':
+
         if int(call_data[3]) == 0:
             cart.delete()
-            update.callback_query.message.delete()
-            update.callback_query.message.reply_text(
-                "Afsuski sizning savatchangiz bo'm-bo'sh.\n"
-                "Keling davom ettiramiz.",
-                reply_markup=ReplyKeyboardRemove()
-            )
-            update.callback_query.message.reply_text(
-                text="Kategoriyalar", reply_markup=make_category_btn(Cart.objects.filter(user=u))
-            )
-            return states.CATEGORY
-
-        cart.quantity -= 1
-        cart.total_price = cart.quantity * cart.product.price
-        cart.save()
+            if Cart.objects.filter(user=u).count() == 0:
+                update.callback_query.message.delete()
+                update.callback_query.message.reply_text(
+                    "Afsuski sizning savatchangiz bo'm-bo'sh.\n"
+                    "Keling davom ettiramiz.",
+                    reply_markup=ReplyKeyboardRemove()
+                )
+                update.callback_query.message.reply_text(
+                    text="Kategoriyalar", reply_markup=make_category_btn(Cart.objects.filter(user=u))
+                )
+                return states.CATEGORY
+        elif int(call_data[3]) > 0:
+            cart.quantity -= 1
+            cart.total_price = cart.quantity * cart.product.price
+            cart.save()
 
     if call_data[1] == 'delete':
         cart.delete()

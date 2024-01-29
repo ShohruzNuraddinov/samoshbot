@@ -46,15 +46,14 @@ def setup_dispatcher(dp):
                     onboarding_handlers.choose_correct_lang,
                 ),
             ],
-            states.MAIN: [
-
-
-            ],
             states.CATEGORY: [
                 MessageHandler(
                     Filters.text,
                     products
-                )
+                ),
+                MessageHandler(Filters.regex('^(📥 Savatcha)$'), cart_items),
+                CallbackQueryHandler(cart_update, pattern='^cart_')
+
             ],
             states.PRODUCTS: [
                 MessageHandler(
@@ -87,8 +86,7 @@ def setup_dispatcher(dp):
         ),
     )
 
-    dp.add_handler(MessageHandler(Filters.regex('^(📥 Savatcha)$'), cart_items))
-
+    # dp.add_handler(MessageHandler(Filters.regex('^(📥 Savatcha)$'), cart_items))
     dp.add_handler(CallbackQueryHandler(cart_update, pattern='^cart_'))
 
     # broadcast message

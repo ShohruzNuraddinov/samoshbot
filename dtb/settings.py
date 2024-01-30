@@ -181,3 +181,4 @@ TELEGRAM_LOGS_CHAT_ID = os.getenv("TELEGRAM_LOGS_CHAT_ID", default=None)
 #     # django.contrib.auth) you may enable sending PII data.
 #     send_default_pii=True
 # )
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
